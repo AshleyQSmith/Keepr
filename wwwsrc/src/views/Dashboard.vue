@@ -12,6 +12,17 @@
       <modal title="New Keep" id="createKeep">
         <createKeep></createKeep>
       </modal>
+      <!-- add vault -->
+      <button
+        data-toggle="modal"
+        data-target="#createVault"
+        class="btn btn-sm btn-success"
+      >
+        Add Vault
+      </button>
+      <modal title="New Vault" id="createVault">
+        <createVault></createVault>
+      </modal>
     </div>
 
     <h3>
@@ -29,9 +40,11 @@
 <script>
 import modal from "../components/modal";
 import createKeep from "../components/createKeep";
+import createVault from "../components/createVault";
 export default {
   mounted() {
     this.$store.dispatch("getAllKeeps");
+    this.$store.dispatch("getUserVaults");
   },
   computed: {
     user() {
@@ -44,6 +57,7 @@ export default {
   components: {
     modal,
     createKeep,
+    createVault,
   },
 };
 </script>
