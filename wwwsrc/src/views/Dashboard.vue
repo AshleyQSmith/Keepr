@@ -1,7 +1,8 @@
 <template>
-  <div class="dashboard row m-0">
+  <div class="dashboard ">
     <div class="col-12 ">
       <h1>WELCOME TO THE DASHBOARD</h1>
+      <!-- add keep -->
       <button
         data-toggle="modal"
         data-target="#createKeep"
@@ -16,7 +17,7 @@
       <button
         data-toggle="modal"
         data-target="#createVault"
-        class="btn btn-sm btn-success"
+        class="btn btn-sm btn-info"
       >
         Add Vault
       </button>
@@ -51,7 +52,7 @@ export default {
       return this.$store.state.user;
     },
     keeps() {
-      return this.$store.getters.keeps;
+      return this.$store.getters.usersKeeps;
     },
   },
   components: {
