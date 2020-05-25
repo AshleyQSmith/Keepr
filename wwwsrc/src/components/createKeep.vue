@@ -42,7 +42,10 @@ export default {
   name: "createKeep",
   data() {
     return {
-      newKeep: {},
+      newKeep: {
+        // may need to change this to 0 to match c# bool
+        isPrivate: false,
+      },
     };
   },
   computed: {
@@ -52,7 +55,7 @@ export default {
   },
   methods: {
     createKeep() {
-      this.$store.dispatch("createKeep", newKeep);
+      this.$store.dispatch("createKeep", this.newKeep);
     },
   },
   components: {},

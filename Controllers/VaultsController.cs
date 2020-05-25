@@ -9,6 +9,7 @@ using Keepr.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 
+
 namespace Keepr.Controllers
 {
   [ApiController]
@@ -16,25 +17,11 @@ namespace Keepr.Controllers
   public class VaultsController : ControllerBase
   {
     private readonly VaultsService _vs;
-
     public VaultsController(VaultsService vs)
     {
       _vs = vs;
     }
 
-    [HttpGet]
-    // public ActionResult<IEnumerable<Vault>> Get()
-    // {
-    //   try
-    //   {
-    //     //NOTE needs to be passing in userID
-    //     return Ok(_vs.Get());
-    //   }
-    //   catch (Exception e)
-    //   {
-    //     return BadRequest(e.Message);
-    //   }
-    // }
   }
-
 }
+
