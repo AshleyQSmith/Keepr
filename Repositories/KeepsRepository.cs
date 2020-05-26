@@ -45,5 +45,11 @@ namespace Keepr.Repositories
       int affectedRows = _db.Execute(sql, new { id, userId });
       return affectedRows == 1;
     }
+
+    internal IEnumerable<Keep> GetByUser(string userId)
+    {
+      string sql = "SELECT * FROM keeps WHERE userId = @UserId";
+      return _db.Query<Keep>(sql, new { userId });
+    }
   }
 }

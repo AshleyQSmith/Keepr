@@ -46,5 +46,10 @@ namespace Keepr.Services
       }
       throw new Exception("errrr");
     }
+
+    internal IEnumerable<Keep> GetByUser(string userId)
+    {
+      return _repo.GetByUser(userId);
+    }
   }
 }

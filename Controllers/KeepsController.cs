@@ -21,6 +21,7 @@ namespace Keepr.Controllers
       _ks = ks;
     }
     [HttpGet]
+    // get's all public keeps
     public ActionResult<IEnumerable<Keep>> Get()
     {
       try
@@ -33,8 +34,28 @@ namespace Keepr.Controllers
       };
     }
 
-    [HttpPost]
     [Authorize]
+    [HttpGet("user")]
+    public ActionResult<IEnumerable<Keep>> GetByUser()
+    {
+      try
+      {
+        Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+        if (user == null)
+        {
+          throw new Exception("Must be logged in.");
+        }
+        string userId = user.Value;
+        return Ok(_ks.GetByUser(userId));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      };
+    }
+
+    [Authorize]
+    [HttpPost]
     public ActionResult<Keep> Post([FromBody] Keep newKeep)
     {
       try
@@ -53,8 +74,8 @@ namespace Keepr.Controllers
       }
     }
 
-    [HttpDelete("{id}")]
     [Authorize]
+    [HttpDelete("{id}")]
     public ActionResult<string> Delete(int id)
     {
       try
