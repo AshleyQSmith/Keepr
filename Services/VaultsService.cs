@@ -14,11 +14,38 @@ namespace Keepr.Services
       _repo = repo;
     }
 
+    public Vault Create(Vault newVault)
+    {
+      return _repo.Create(newVault);
+    }
 
-    // public IEnumerable<Vault> Get()
-    // {
-    //   //NOTE NEEDS TO BE PASSING IN USER ID
-    //   return _repo.Get();
-    // }
+    public IEnumerable<Vault> Get(string userId)
+    {
+      return _repo.Get(userId);
+    }
+
+    public Vault GetById(int id)
+    {
+      Vault foundVault = _repo.GetById(id);
+      if (foundVault == null)
+      {
+        throw new Exception("Invalid Id");
+      }
+      return foundVault;
+    }
+
+    internal object Delete(int id, string userId)
+    {
+      Vault foundVault = GetById(id);
+      if (foundVault.UserId != userId)
+      {
+        throw new Exception("This is not your vault!");
+      }
+      if (_repo.Delete(id, userId))
+      {
+        return "Deleted!";
+      }
+      throw new Exception("errrrr");
+    }
   }
 }

@@ -21,17 +21,15 @@ export default new Vuex.Store({
     usersKeeps: [],
     userVaults: [],
   },
-  
-  
+
   mutations: {
     setPublicKeeps(state, keeps) {
       state.publicKeeps = keeps;
     },
-    setUserVaults(state, userVaults){
-      state.userVaults = userVaults
+    setUserVaults(state, userVaults) {
+      state.userVaults = userVaults;
     },
   },
-
 
   actions: {
     setBearer({}, bearer) {
@@ -40,7 +38,6 @@ export default new Vuex.Store({
     resetBearer() {
       api.defaults.headers.authorization = "";
     },
-
 
     // SECTION Keeps
 
@@ -72,8 +69,6 @@ export default new Vuex.Store({
       }
     },
 
-    
-
     // SECTION Vaults
     async createVault({ dispatch, commit }, newVault) {
       try {
@@ -81,16 +76,16 @@ export default new Vuex.Store({
         dispatch("getVaultsByUser");
       } catch (error) {
         console.error(error);
-    }
-  },
+      }
+    },
 
-  async getVaultsByUser({ dispatch, commit }) {
-    try {
-      let res = await api.get("vaults");
-      commit("setUserVaults", res.data);
-    } catch (error) {
-      console.error(error);
-    }
+    async getVaultsByUser({ dispatch, commit }) {
+      try {
+        let res = await api.get("Vaults");
+        commit("setUserVaults", res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
-  
 });
