@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     createVault() {
-      this.$store.dispatch("createVault", newVault);
+      this.$store.dispatch("createVault", this.newVault);
     },
   },
   components: {},

@@ -32,5 +32,19 @@ namespace Keepr.Repositories
       KeepData.Id = _db.ExecuteScalar<int>(sql, KeepData);
       return KeepData;
     }
+
+    internal Keep GetById(int id)
+    {
+      string sql = "SELECT * FROM keeps WHERE id = @Id";
+      return _db.QueryFirstOrDefault<Keep>(sql, new { id });
+
+    }
+
+    internal bool Delete(int id, string userId)
+    {
+      string sql = "DELETE FROM keeps WHERE id = @Id AND userId = @UserId LIMIT 1";
+      int affectedRows = _db.Execute(sql, new { id, userId });
+      return affectedRows == 1;
+    }
   }
 }

@@ -1,14 +1,16 @@
 <template>
   <div class="home ">
-    <col-12>
+    <div class="col-12 ">
       <!-- displays keeps -->
-      <viewKeep
-        v-for="keep in keeps"
-        :keepData="keep"
-        :key="keep._id"
-        class="card-group"
-      ></viewKeep>
-    </col-12>
+      <div class="card-group ">
+        <viewKeep
+          v-for="keep in keeps"
+          :keepData="keep"
+          :key="keep.id"
+          class="card-group"
+        ></viewKeep>
+      </div>
+    </div>
     <h1>Welcome Home</h1>
     <h3>
       this is where all of the keeps are displayed (not behind auth). Should be
@@ -25,14 +27,14 @@ export default {
   //   return {}
   // },
   mounted() {
-    this.$store.dispatch("getAllKeeps");
+    this.$store.dispatch("getPublicKeeps");
   },
   computed: {
     user() {
       return this.$store.state.user;
     },
-    Keeps() {
-      return this.$store.getters.publicKeeps;
+    keeps() {
+      return this.$store.state.publicKeeps;
     },
   },
   methods: {
