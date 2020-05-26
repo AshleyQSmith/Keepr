@@ -26,12 +26,16 @@
       </modal>
     </div>
 
-    <h3>
-      This is where the users's vaults display, ONLY PLACE THESE DISPLAY -
-      PRIVATE TO USER, on click, opens vault to show all keeps inside
-    </h3>
+    <h2>
+      My Vaults
+    </h2>
+    <viewVault
+      v-for="vault in vaults"
+      :vaultData="vault"
+      :key="vault.id"
+    ></viewVault>
     <h2>My Keeps</h2>
-    <viewKeep v-for="keep in keeps" :keepData="keep" :key="keep.id"></viewKeep>
+    <viewKeep v-for="keep in keeps" :keepData="keep" :key="keep.id"> </viewKeep>
     <!-- public {{ publicKeeps }} user {{ userKeeps }} -->
   </div>
 </template>
@@ -41,10 +45,11 @@ import modal from "../components/modal";
 import createKeep from "../components/createKeep";
 import createVault from "../components/createVault";
 import viewKeep from "../components/viewKeep";
+import viewVault from "../components/viewVault";
 export default {
   mounted() {
     this.$store.dispatch("getUserKeeps");
-    // this.$store.dispatch("getUserVaults");
+    this.$store.dispatch("getVaultsByUser");
   },
   computed: {
     user() {
@@ -53,12 +58,16 @@ export default {
     keeps() {
       return this.$store.state.userKeeps;
     },
+    vaults() {
+      return this.$store.state.userVaults;
+    },
   },
   components: {
     modal,
     createKeep,
     createVault,
     viewKeep,
+    viewVault,
   },
 };
 </script>

@@ -48,7 +48,6 @@ export default new Vuex.Store({
       try {
         let res = await api.post("Keeps", newKeep);
         dispatch("getPublicKeeps");
-        // commit("addKeep", newKeep);
       } catch (error) {
         console.error(error);
       }
@@ -63,7 +62,7 @@ export default new Vuex.Store({
       }
     },
 
-    async getUserKeeps({ dispatch, commit }, userId) {
+    async getUserKeeps({ dispatch, commit }) {
       try {
         let res = await api.get("Keeps/user");
         commit("setUserKeeps", res.data);
@@ -93,7 +92,7 @@ export default new Vuex.Store({
 
     async getVaultsByUser({ dispatch, commit }) {
       try {
-        let res = await api.get("Vaults");
+        let res = await api.get("Vaults/user");
         commit("setUserVaults", res.data);
       } catch (error) {
         console.error(error);

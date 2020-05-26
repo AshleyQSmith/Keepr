@@ -27,10 +27,6 @@ export default {
   },
   computed: {},
   methods: {
-    imgUrl() {
-      this.keepData.img = imgUrl;
-      return imgUrl;
-    },
     Delete() {
       this.$store.dispatch("deleteKeep", this.keepData.id);
     },
@@ -39,8 +35,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.card {
-  width: ;
-}
-</style>
+<style scoped></style>

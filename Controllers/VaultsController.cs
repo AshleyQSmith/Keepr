@@ -22,9 +22,9 @@ namespace Keepr.Controllers
       _vs = vs;
     }
 
-    [HttpGet]
     [Authorize]
-    public ActionResult<IEnumerable<Vault>> Get()
+    [HttpGet("user")]
+    public ActionResult<IEnumerable<Vault>> GetByUser()
     {
       try
       {
@@ -33,8 +33,8 @@ namespace Keepr.Controllers
         {
           throw new Exception("Must be logged in.");
         }
-        var userId = user.Value;
-        return Ok(_vs.Get(userId));
+        string userId = user.Value;
+        return Ok(_vs.GetByUser(userId));
       }
       catch (Exception e)
       {
@@ -42,8 +42,8 @@ namespace Keepr.Controllers
       }
     }
 
-    [HttpPost]
     [Authorize]
+    [HttpPost]
     public ActionResult<Vault> Post([FromBody] Vault newVault)
     {
       try
@@ -63,8 +63,8 @@ namespace Keepr.Controllers
     }
 
 
-    [HttpDelete("{id}")]
     [Authorize]
+    [HttpDelete("{id}")]
     public ActionResult<string> Delete(int id)
     {
       try

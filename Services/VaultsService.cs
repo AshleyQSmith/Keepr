@@ -19,9 +19,9 @@ namespace Keepr.Services
       return _repo.Create(newVault);
     }
 
-    public IEnumerable<Vault> Get(string userId)
+    public IEnumerable<Vault> GetByUser(string userId)
     {
-      return _repo.Get(userId);
+      return _repo.GetByUser(userId);
     }
 
     public Vault GetById(int id)
