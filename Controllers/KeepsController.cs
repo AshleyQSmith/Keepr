@@ -34,6 +34,19 @@ namespace Keepr.Controllers
       };
     }
 
+    [HttpGet("{id}")]
+    public ActionResult<Keep> GetById(int id)
+    {
+      try
+      {
+        return Ok(_ks.GetById(id));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
     [Authorize]
     [HttpGet("user")]
     public ActionResult<IEnumerable<Keep>> GetByUser()

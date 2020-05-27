@@ -6,6 +6,8 @@ import Home from "./views/Home.vue";
 import Dashboard from "./views/Dashboard.vue";
 // @ts-ignore
 import OpenVault from "./views/OpenVault.vue";
+// @ts-ignore
+import OpenKeep from "./views/OpenKeep.vue";
 import { authGuard } from "@bcwdev/auth0-vue";
 
 Vue.use(Router);
@@ -27,6 +29,12 @@ export default new Router({
       path: "/vault/:vaultId",
       name: "openVault",
       component: OpenVault,
+      beforeEnter: authGuard,
+    },
+    {
+      path: "/keep/:keepId",
+      name: "openKeep",
+      component: OpenKeep,
       beforeEnter: authGuard,
     },
   ],
