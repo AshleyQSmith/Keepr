@@ -1,21 +1,13 @@
 <template>
   <div class="home ">
-    <div class="col-12 ">
-      <!-- displays keeps -->
-      <div class="card-group ">
-        <viewKeep
-          v-for="keep in keeps"
-          :keepData="keep"
-          :key="keep.id"
-          class="card-group"
-        ></viewKeep>
-      </div>
+    <!-- displays keeps -->
+    <div class="col-12 card-deck">
+      <viewKeep
+        v-for="keep in keeps"
+        :keepData="keep"
+        :key="keep.id"
+      ></viewKeep>
     </div>
-    <h1>Welcome Home</h1>
-    <h3>
-      this is where all of the keeps are displayed (not behind auth). Should be
-      imported from a vue compotent that displays each keep in it's own card
-    </h3>
   </div>
 </template>
 
@@ -47,3 +39,5 @@ export default {
   },
 };
 </script>
+
+<style scoped></style>

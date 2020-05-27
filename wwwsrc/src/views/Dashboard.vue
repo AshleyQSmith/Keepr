@@ -40,8 +40,13 @@
         <createKeep></createKeep>
       </modal>
       <!-- view keeps -->
-      <viewKeep v-for="keep in keeps" :keepData="keep" :key="keep.id">
-      </viewKeep>
+      <div class="col-12 card-deck">
+        <viewKeep
+          v-for="keep in keeps"
+          :keepData="keep"
+          :key="keep.id"
+        ></viewKeep>
+      </div>
     </div>
   </div>
 </template>
