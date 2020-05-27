@@ -28,7 +28,7 @@ namespace Keepr.Services
       Keep foundKeep = _repo.GetById(id);
       if (foundKeep == null)
       {
-        throw new Exception("Invalid Id");
+        throw new Exception("Invalid Keep Id");
       }
       return foundKeep;
     }

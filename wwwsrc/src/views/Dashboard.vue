@@ -1,18 +1,12 @@
 <template>
   <div class="dashboard ">
     <div class="col-12 ">
-      <h1>WELCOME TO THE DASHBOARD</h1>
-      <!-- add keep -->
-      <button
-        data-toggle="modal"
-        data-target="#createKeep"
-        class="btn btn-sm btn-success"
-      >
-        Add Keep
-      </button>
-      <modal title="New Keep" id="createKeep">
-        <createKeep></createKeep>
-      </modal>
+      <h1>WELCOME TO YOUR DASHBOARD</h1>
+    </div>
+    <div class="col-12 ">
+      <h2>
+        My Vaults
+      </h2>
       <!-- add vault -->
       <button
         data-toggle="modal"
@@ -24,19 +18,31 @@
       <modal title="New Vault" id="createVault">
         <createVault></createVault>
       </modal>
+      <!-- view vaults -->
+      <viewVault
+        v-for="vault in vaults"
+        :vaultData="vault"
+        :key="vault.id"
+      ></viewVault>
     </div>
 
-    <h2>
-      My Vaults
-    </h2>
-    <viewVault
-      v-for="vault in vaults"
-      :vaultData="vault"
-      :key="vault.id"
-    ></viewVault>
-    <h2>My Keeps</h2>
-    <viewKeep v-for="keep in keeps" :keepData="keep" :key="keep.id"> </viewKeep>
-    <!-- public {{ publicKeeps }} user {{ userKeeps }} -->
+    <div class="col-12">
+      <h2>My Keeps</h2>
+      <!-- add keep -->
+      <button
+        data-toggle="modal"
+        data-target="#createKeep"
+        class="btn btn-sm btn-success"
+      >
+        Add Keep
+      </button>
+      <modal title="New Keep" id="createKeep">
+        <createKeep></createKeep>
+      </modal>
+      <!-- view keeps -->
+      <viewKeep v-for="keep in keeps" :keepData="keep" :key="keep.id">
+      </viewKeep>
+    </div>
   </div>
 </template>
 

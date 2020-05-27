@@ -41,6 +41,25 @@ namespace Keepr.Controllers
         return BadRequest(e.Message);
       }
     }
+    [Authorize]
+    [HttpGet("{id}")]
+    public ActionResult<Vault> GetById(int id)
+    {
+      try
+      {
+        Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+        if (user == null)
+        {
+          throw new Exception("Must be logged in.");
+        }
+        string userId = user.Value;
+        return Ok(_vs.GetById(id, userId));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
 
     [Authorize]
     [HttpPost]

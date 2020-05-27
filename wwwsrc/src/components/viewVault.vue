@@ -17,7 +17,7 @@ export default {
     OpenVault() {
       this.$store.commit("setActiveVault", this.vaultData),
         this.$router.push({
-          name: "OpenVault",
+          name: "openVault",
           params: { vaultId: this.vaultData.id },
         });
     },

@@ -24,23 +24,23 @@ namespace Keepr.Services
       return _repo.GetByUser(userId);
     }
 
-    public Vault GetById(int id)
+    public Vault GetById(int id, string userId)
     {
-      Vault foundVault = _repo.GetById(id);
+      Vault foundVault = _repo.GetById(id, userId);
       if (foundVault == null)
       {
-        throw new Exception("Invalid Id");
+        throw new Exception("Invalid Vault Id");
+      }
+      if (foundVault.UserId != userId)
+      {
+        throw new Exception("This is not your vault!");
       }
       return foundVault;
     }
 
     internal object Delete(int id, string userId)
     {
-      Vault foundVault = GetById(id);
-      if (foundVault.UserId != userId)
-      {
-        throw new Exception("This is not your vault!");
-      }
+      Vault foundVault = GetById(id, userId);
       if (_repo.Delete(id, userId))
       {
         return "Deleted!";
