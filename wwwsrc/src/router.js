@@ -4,6 +4,8 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 // @ts-ignore
 import Dashboard from "./views/Dashboard.vue";
+// @ts-ignore
+import OpenVault from "./views/OpenVault.vue";
 import { authGuard } from "@bcwdev/auth0-vue";
 
 Vue.use(Router);
@@ -13,13 +15,19 @@ export default new Router({
     {
       path: "/",
       name: "home",
-      component: Home
+      component: Home,
     },
     {
       path: "/dashboard",
       name: "dashboard",
       component: Dashboard,
-      beforeEnter: authGuard
-    }
-  ]
+      beforeEnter: authGuard,
+    },
+    {
+      path: "/vault/:vaultId",
+      name: "openVault",
+      component: OpenVault,
+      beforeEnter: authGuard,
+    },
+  ],
 });

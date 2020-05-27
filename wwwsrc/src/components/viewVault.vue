@@ -1,5 +1,5 @@
 <template>
-  <div class="viewVault col-12">
+  <div class="viewVault col-12" @click="OpenVault()">
     <h2>{{ vaultData.name }}</h2>
     <h4 class="text-muted">{{ vaultData.description }}</h4>
   </div>
@@ -13,7 +13,15 @@ export default {
     return {};
   },
   computed: {},
-  methods: {},
+  methods: {
+    OpenVault() {
+      this.$store.commit("setActiveVault", this.vaultData),
+        this.$router.push({
+          name: "OpenVault",
+          params: { vaultId: this.vaultData.id },
+        });
+    },
+  },
   components: {},
 };
 </script>

@@ -20,6 +20,7 @@ export default new Vuex.Store({
     publicKeeps: [],
     userKeeps: [],
     userVaults: [],
+    activeVault: {},
   },
 
   mutations: {
@@ -31,6 +32,9 @@ export default new Vuex.Store({
     },
     setUserVaults(state, userVaults) {
       state.userVaults = userVaults;
+    },
+    setActiveVault(state, vaultData) {
+      state.activeVault = vaultData;
     },
   },
 
