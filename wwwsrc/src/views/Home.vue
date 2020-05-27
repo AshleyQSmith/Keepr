@@ -1,7 +1,7 @@
 <template>
   <div class="home ">
     <!-- displays keeps -->
-    <div class="col-12 card-deck">
+    <div class="col-12 card-deck justify-content-center">
       <viewKeep
         v-for="keep in keeps"
         :keepData="keep"

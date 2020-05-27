@@ -14,13 +14,13 @@
         >
       </div>
 
-      <div class="card-footer d-flex">
+      <div class="card-footer d-flex justify-content-center">
         <!-- view button -->
-        <button class="btn btn-danger btn-sm" @click="OpenKeep()">
+        <button class="btn btn-danger btn-sm mx-auto" @click="OpenKeep()">
           View
         </button>
         <!-- keep button -->
-        <div class="dropdown">
+        <div class="dropdown mx-auto">
           <button
             class="btn btn-sm btn-success dropdown-toggle"
             type="button"
@@ -44,14 +44,16 @@
         </div>
 
         <!-- share button -->
-        <button class="btn btn-info btn-sm" @click="Share()">
+        <button class="btn btn-info btn-sm mx-auto" @click="Share()">
           Share
         </button>
 
-        <!-- delete until it's moved -->
+        <!-- delete button -->
+        <!-- <div v-if="activeKeep.userId == user.id"> -->
         <button class="btn btn-danger btn-sm" @click="Delete()">
           Delete
         </button>
+        <!-- </div> -->
       </div>
     </div>
   </div>
