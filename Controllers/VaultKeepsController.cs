@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Keepr.Services;
 using Keepr.Models;
+using System.Security.Claims;
+using System;
+using Microsoft.AspNetCore.Authorization;
+
 namespace Keepr.Controllers
 {
   [ApiController]
@@ -15,10 +19,17 @@ namespace Keepr.Controllers
     }
 
     [HttpPost]
+    [Authorize]
     public ActionResult<VaultKeepViewModel> Create([FromBody] VaultKeepViewModel newVaultKeep)
     {
       try
       {
+        Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+        if (user == null)
+        {
+          throw new Exception("Must be logged in.");
+        }
+        newVaultKeep.UserId = user.Value;
         return Ok(_vks.Create(newVaultKeep));
       }
       catch (System.Exception)
@@ -29,11 +40,18 @@ namespace Keepr.Controllers
     }
 
     [HttpDelete("{id}")]
+    [Authorize]
     public ActionResult<string> Delete(int id)
     {
       try
       {
-        return Ok(_vks.Delete(id));
+        Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+        if (user == null)
+        {
+          throw new Exception("Must be logged in.");
+        }
+        string userId = user.Value;
+        return Ok(_vks.Delete(id, userId));
       }
       catch (System.Exception error)
       {

@@ -19,18 +19,23 @@ namespace Keepr.Repositories
     {
       string sql = @"
         INSERT INTO vaultkeeps
-        (vaultId, keepId)
+        (vaultId, keepId, userId)
         VALUES
-        (@VaultId, @KeepId);
+        (@VaultId, @KeepId, @UserId);
         SELECT LAST_INSERT_ID()";
       newVaultKeep.Id = _db.ExecuteScalar<int>(sql, newVaultKeep);
       return newVaultKeep;
     }
 
-    internal bool Delete(int id)
+    internal VaultKeepViewModel GetById(int id, string userId)
     {
-      string sql = "DELETE FROM vaultkeeps WHERE id = @id LIMIT 1";
-      int affectedRows = _db.Execute(sql, new { id });
+      string sql = "SELECT * FROM vaultkeeps WHERE id = @Id AND userId = @UserId";
+      return _db.QueryFirstOrDefault<VaultKeepViewModel>(sql, new { id, userId });
+    }
+    internal bool Delete(int id, string userId)
+    {
+      string sql = "DELETE FROM vaultkeeps WHERE id = @id AND userId = @UserId LIMIT 1";
+      int affectedRows = _db.Execute(sql, new { id, userId });
       return affectedRows == 1;
     }
 

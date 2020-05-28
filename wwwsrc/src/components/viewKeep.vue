@@ -34,10 +34,10 @@
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a
               class="dropdown-item "
-              @click.prevent="AddToVault(this.Vault.id)"
               v-for="Vault in Vaults"
               :key="Vault.id"
               href="#"
+              @click.prevent="AddToVault((newVaultKeep.vaultId = Vault.id))"
               >{{ Vault.name }}</a
             >
           </div>
@@ -64,7 +64,12 @@ export default {
   name: "viewKeep",
   props: ["keepData"],
   data() {
-    return {};
+    return {
+      newVaultKeep: {
+        vaultId: "",
+        keepId: this.keepData.id,
+      },
+    };
   },
   mounted() {
     this.$store.dispatch("getVaultsByUser");
@@ -78,8 +83,8 @@ export default {
     Delete() {
       this.$store.dispatch("deleteKeep", this.keepData.id);
     },
-    AddToVault() {
-      this.$store.dispatch("addVaultKeep", this.keepdata.id, this.vault.id);
+    AddToVault(vaultID) {
+      this.$store.dispatch("createVaultKeep", this.newVaultKeep);
     },
     OpenKeep() {
       this.$store.commit("setActiveKeep", this.keepData),

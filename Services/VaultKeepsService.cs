@@ -1,5 +1,5 @@
-using Keepr.Models;
 using System;
+using Keepr.Models;
 using Keepr.Repositories;
 
 namespace Keepr.Services
@@ -18,9 +18,25 @@ namespace Keepr.Services
       return _repo.Create(newvVaultKeep);
     }
 
-    internal string Delete(int id)
+    public VaultKeepViewModel GetById(int id, string userId)
     {
-      if (_repo.Delete(id))
+      VaultKeepViewModel foundVaultKeep = _repo.GetById(id, userId);
+      if (foundVaultKeep == null)
+      {
+        throw new Exception("Invalid Id");
+      }
+      if (foundVaultKeep.UserId != userId)
+      {
+        throw new Exception("This is not yours!");
+      }
+      return foundVaultKeep;
+    }
+
+
+    internal string Delete(int id, string userId)
+    {
+      VaultKeepViewModel foundVaultKeep = GetById(id, userId);
+      if (_repo.Delete(id, userId))
       {
         return "Deleted!";
       }

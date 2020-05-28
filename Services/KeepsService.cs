@@ -51,5 +51,10 @@ namespace Keepr.Services
     {
       return _repo.GetByUser(userId);
     }
+
+    internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int id)
+    {
+      return _repo.GetKeepsByVaultId(id);
+    }
   }
 }

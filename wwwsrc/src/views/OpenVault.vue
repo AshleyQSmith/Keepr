@@ -5,12 +5,13 @@
     <button class="btn btn-outline-danger btn-sm" @click="DeleteVault()">
       Delete Vault
     </button>
-    <!-- not sure if this will work, since have to pull in keeps for jsut this vault? -->
-    <!-- <viewKeep v-for="keep in keeps" :keepData="keep" :key="keep.id"> </viewKeep> -->
+    <viewKeep v-for="keep in vaultKeeps" :keepData="keep" :key="keep.id">
+    </viewKeep>
   </div>
 </template>
 
 <script>
+import viewKeep from "../components/viewKeep";
 export default {
   name: "openVault",
   data() {
@@ -18,10 +19,14 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getVaultById", this.$route.params.vaultId);
+    this.$store.dispatch("getKeepsByVaultId", this.$route.params.vaultId);
   },
   computed: {
     activeVault() {
       return this.$store.state.activeVault;
+    },
+    vaultKeeps() {
+      return this.$store.state.activeVaultKeeps;
     },
   },
   methods: {
@@ -32,7 +37,9 @@ export default {
       });
     },
   },
-  components: {},
+  components: {
+    viewKeep,
+  },
 };
 </script>
 
