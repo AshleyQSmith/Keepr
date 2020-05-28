@@ -150,7 +150,6 @@ export default new Vuex.Store({
     async createVaultKeep({ dispatch, commit }, newVaultKeep) {
       try {
         let res = await api.post("VaultKeeps", newVaultKeep);
-        // dispatch("increaseKeepCount", newVaultKeep.keepId);
       } catch (error) {
         console.error(error);
       }
@@ -158,8 +157,8 @@ export default new Vuex.Store({
 
     async deleteVaultKeep({ dispatch, commit }, vaultKeepId) {
       try {
-        let res = await api.delete("VaultKeeps", vaultKeepId);
-        // dispatch("getVaultById")
+        let res = await api.delete("VaultKeeps/" + vaultKeepId);
+        dispatch("getKeepsByVaultId", `${this.state.activeVault.id}`);
       } catch (error) {
         console.error(error);
       }

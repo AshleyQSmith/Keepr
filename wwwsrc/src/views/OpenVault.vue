@@ -5,13 +5,13 @@
     <button class="btn btn-outline-danger btn-sm" @click="DeleteVault()">
       Delete Vault
     </button>
-    <viewKeep v-for="keep in vaultKeeps" :keepData="keep" :key="keep.id">
-    </viewKeep>
+    <viewVaultKeep v-for="keep in vaultKeeps" :keepData="keep" :key="keep.id">
+    </viewVaultKeep>
   </div>
 </template>
 
 <script>
-import viewKeep from "../components/viewKeep";
+import viewVaultKeep from "../components/viewVaultKeep";
 export default {
   name: "openVault",
   data() {
@@ -38,7 +38,7 @@ export default {
     },
   },
   components: {
-    viewKeep,
+    viewVaultKeep,
   },
 };
 </script>

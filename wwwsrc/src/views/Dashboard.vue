@@ -41,11 +41,11 @@
       </modal>
       <!-- view keeps -->
       <div class="col-12 card-deck">
-        <viewKeep
+        <viewMyKeep
           v-for="keep in keeps"
           :keepData="keep"
           :key="keep.id"
-        ></viewKeep>
+        ></viewMyKeep>
       </div>
     </div>
   </div>
@@ -55,7 +55,7 @@
 import modal from "../components/modal";
 import createKeep from "../components/createKeep";
 import createVault from "../components/createVault";
-import viewKeep from "../components/viewKeep";
+import viewMyKeep from "../components/viewMyKeep";
 import viewVault from "../components/viewVault";
 export default {
   mounted() {
@@ -77,7 +77,7 @@ export default {
     modal,
     createKeep,
     createVault,
-    viewKeep,
+    viewMyKeep,
     viewVault,
   },
 };

@@ -1,5 +1,5 @@
 <template>
-  <div class="viewKeep justify-content-center">
+  <div class="viewMyKeep justify-content-center">
     <div class="card my-3" style="max-width: 18rem;">
       <img :src="keepData.img" class="card-img-top" />
 
@@ -47,6 +47,12 @@
         <button class="btn btn-info btn-sm mx-auto" @click="Share()">
           Share
         </button>
+
+        <!-- delete button -->
+        <button class="btn btn-danger btn-sm" @click="Delete()">
+          Delete
+        </button>
+        <!-- </div> -->
       </div>
     </div>
   </div>
@@ -54,7 +60,7 @@
 
 <script>
 export default {
-  name: "viewKeep",
+  name: "viewMyKeep",
   props: ["keepData"],
   data() {
     return {
@@ -73,6 +79,9 @@ export default {
     },
   },
   methods: {
+    Delete() {
+      this.$store.dispatch("deleteKeep", this.keepData.id);
+    },
     AddToVault(vaultID) {
       this.$store.dispatch("createVaultKeep", this.newVaultKeep);
     },

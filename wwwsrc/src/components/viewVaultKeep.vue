@@ -1,5 +1,5 @@
 <template>
-  <div class="viewKeep justify-content-center">
+  <div class="viewVaultKeep justify-content-center">
     <div class="card my-3" style="max-width: 18rem;">
       <img :src="keepData.img" class="card-img-top" />
 
@@ -48,13 +48,18 @@
           Share
         </button>
       </div>
+
+      <!-- remove button -->
+      <button class="btn btn-outline-danger btn-sm" @click="RemoveFromVault()">
+        Remove From Vault
+      </button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "viewKeep",
+  name: "viewVaultKeep",
   props: ["keepData"],
   data() {
     return {
@@ -62,6 +67,10 @@ export default {
         vaultId: "",
         keepId: this.keepData.id,
       },
+      // vaultKeepData: {
+      //   vaultKeepId: this.keepData.vaultKeepId,
+      //   vaultId: this.keepdata.vaultId,
+      // },
     };
   },
   mounted() {
@@ -82,6 +91,9 @@ export default {
           name: "openKeep",
           params: { keepId: this.keepData.id },
         });
+    },
+    RemoveFromVault() {
+      this.$store.dispatch("deleteVaultKeep", this.keepData.vaultKeepId);
     },
     Share() {},
   },
