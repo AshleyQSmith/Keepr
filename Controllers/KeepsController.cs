@@ -107,7 +107,24 @@ namespace Keepr.Controllers
       }
 
     }
-
+    [Authorize]
+    [HttpPut("{id}")]
+    public ActionResult<Keep> Edit(int id, [FromBody] Keep updatedKeep)
+    {
+      try
+      {
+        Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+        if (user == null)
+        {
+          throw new Exception("Must be logged in to edit");
+        }
+        return Ok(_ks.Edit(id, updatedKeep));
+      }
+      catch (System.Exception err)
+      {
+        return BadRequest(err.Message);
+      }
+    }
 
   }
 }

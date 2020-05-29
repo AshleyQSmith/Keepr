@@ -23,6 +23,18 @@
           class="form-control"
           placeholder="Image URL"
         />
+
+        <div class="custom-control mt-3 m-1 custom-checkbox">
+          <input
+            type="checkbox"
+            @click="save = !save"
+            class="custom-control-input"
+            id="customCheck1"
+          />
+          <label class="custom-control-label" for="customCheck1"
+            >Share As Public Keep</label
+          >
+        </div>
       </div>
 
       <button
@@ -42,10 +54,8 @@ export default {
   name: "createKeep",
   data() {
     return {
-      newKeep: {
-        // may need to change this to 0 to match c# bool
-        isPrivate: false,
-      },
+      newKeep: {},
+      save: false,
     };
   },
   computed: {
@@ -55,6 +65,11 @@ export default {
   },
   methods: {
     createKeep() {
+      if (this.save) {
+        this.newKeep.isPrivate = false;
+      } else {
+        this.newKeep.isPrivate = true;
+      }
       this.$store.dispatch("createKeep", this.newKeep);
     },
   },

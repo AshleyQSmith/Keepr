@@ -13,6 +13,7 @@ namespace Keepr.Services
     {
       _repo = repo;
     }
+    // gets all public keeps
     public IEnumerable<Keep> Get()
     {
       return _repo.Get();
@@ -55,6 +56,16 @@ namespace Keepr.Services
     internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int id)
     {
       return _repo.GetKeepsByVaultId(id);
+    }
+
+    internal Keep Edit(int id, Keep updatedKeep)
+    {
+      Keep foundKeep = GetById(id);
+      foundKeep.IsPrivate = updatedKeep.IsPrivate;
+      foundKeep.Views = updatedKeep.Views;
+      foundKeep.Keeps = updatedKeep.Keeps;
+      foundKeep.Shares = updatedKeep.Shares;
+      return _repo.Edit(foundKeep);
     }
   }
 }

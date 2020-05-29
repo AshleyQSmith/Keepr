@@ -60,6 +60,21 @@ namespace Keepr.Repositories
       return _db.Query<VaultKeepViewModel>(sql, new { vaultId });
     }
 
+    internal Keep Edit(Keep keepToUpdate)
+    {
+      string sql = @"
+        UPDATE keeps
+        SET
+          isPrivate = @IsPrivate,
+          views = @Views,
+          keeps = @Keeps,
+          shares = @Shares,
+        WHERE id = @Id LIMIT 1";
+      _db.Execute(sql, keepToUpdate);
+      return keepToUpdate;
+
+    }
+
     internal IEnumerable<Keep> GetByUser(string userId)
     {
       string sql = "SELECT * FROM keeps WHERE userId = @UserId";

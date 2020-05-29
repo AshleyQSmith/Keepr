@@ -60,11 +60,12 @@ export default {
   mounted() {
     this.$store.dispatch("getUserKeeps");
     this.$store.dispatch("getVaultsByUser");
+    this.$store.dispatch("getUser");
   },
   computed: {
-    // user() {
-    //   return this.$store.state.user;
-    // },
+    user() {
+      return this.$store.state.user;
+    },
     keeps() {
       return this.$store.state.userKeeps;
     },

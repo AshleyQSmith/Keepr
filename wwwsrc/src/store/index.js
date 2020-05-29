@@ -17,7 +17,7 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   state: {
-    // user: {},
+    user: {},
     publicKeeps: [],
     userKeeps: [],
     activeKeep: {},
@@ -27,9 +27,9 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    // setUser(state, user) {
-    //   state.user = user;
-    // },
+    setUser(state, user) {
+      state.user = user;
+    },
     setPublicKeeps(state, keeps) {
       state.publicKeeps = keeps;
     },
@@ -57,14 +57,14 @@ export default new Vuex.Store({
     resetBearer() {
       api.defaults.headers.authorization = "";
     },
-    // async getProfile({ commit }) {
-    //   try {
-    //     let res = await api.get("Profile");
-    //     commit("setUser", res.data);
-    //   } catch (err) {
-    //     console.error(err);
-    //   }
-    // },
+    async getUser({ commit }) {
+      try {
+        let res = await api.get("User");
+        commit("setUser", res.data);
+      } catch (err) {
+        console.error(err);
+      }
+    },
     // SECTION Keeps
 
     async createKeep({ dispatch, commit }, newKeep) {
@@ -112,13 +112,35 @@ export default new Vuex.Store({
       }
     },
 
-    // async increaseKeepCount({dispatch, commit}, keepId){
-    //   try {
-    //     await api.put("Keeps/" + keepId)
-    //   } catch (error) {
-    //     console.error(error)
-    //   }
-    // }
+    async setKeepPublic({ dispatch, commit }, keepData) {
+      try {
+        let res = await api.put("Keeps/" + `${keepData.id}`, keepData);
+        commit("setUserKeeps", res.data);
+        // dispatch("getUserKeeps", keepData.userId)
+      } catch (error) {}
+    },
+
+    async increaseKeepCount({ dispatch, commit }, keepData) {
+      try {
+        await api.put("Keeps/" + `${keepData.id}`, keepData);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async increaseViewCount({ dispatch, commit }, keepData) {
+      try {
+        await api.put("Keeps/" + `${keepData.id}`, keepData);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async increaseShareCount({ dispatch, commit }, keepData) {
+      try {
+        await api.put("Keeps/" + `${keepData.id}`, keepData);
+      } catch (error) {
+        console.error(error);
+      }
+    },
 
     // SECTION Vaults
     async createVault({ dispatch, commit }, newVault) {
