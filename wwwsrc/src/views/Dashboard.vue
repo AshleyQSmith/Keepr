@@ -38,15 +38,14 @@
       <modal title="New Keep" id="createKeep">
         <createKeep></createKeep>
       </modal>
-      </div>
-      <!-- view keeps -->
-      <div class="col-12 mx-auto card-deck">
-        <viewMyKeep
-          v-for="keep in keeps"
-          :keepData="keep"
-          :key="keep.id"
-        ></viewMyKeep>
-      </div>
+    </div>
+    <!-- view keeps -->
+    <div class="col-11 mx-auto card-deck justify-content-center">
+      <viewMyKeep
+        v-for="keep in keeps"
+        :keepData="keep"
+        :key="keep.id"
+      ></viewMyKeep>
     </div>
   </div>
 </template>
@@ -63,9 +62,9 @@ export default {
     this.$store.dispatch("getVaultsByUser");
   },
   computed: {
-    user() {
-      return this.$store.state.user;
-    },
+    // user() {
+    //   return this.$store.state.user;
+    // },
     keeps() {
       return this.$store.state.userKeeps;
     },

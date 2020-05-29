@@ -1,12 +1,19 @@
 <template>
   <div class="openVault">
-    <h1>{{ activeVault.name }}</h1>
-    <h4>{{ activeVault.description }}</h4>
-    <button class="btn btn-outline-danger btn-sm" @click="DeleteVault()">
-      Delete Vault
-    </button>
-    <viewVaultKeep v-for="keep in vaultKeeps" :keepData="keep" :key="keep.id">
-    </viewVaultKeep>
+    <div class="col-9 mb-1 mt-3 mx-auto d-flex justify-content-between">
+      <h1>{{ activeVault.name }}</h1>
+      <button class="btn btn-outline-danger btn-sm" @click="DeleteVault()">
+        Delete Vault
+      </button>
+    </div>
+    <div class="col-9 mb-1 mt-3 mx-auto d-flex justify-content-between">
+      <h4>{{ activeVault.description }}</h4>
+    </div>
+    <!-- view vaulKeeps -->
+    <div class="col-11 mx-auto card-deck">
+      <viewVaultKeep v-for="keep in vaultKeeps" :keepData="keep" :key="keep.id">
+      </viewVaultKeep>
+    </div>
   </div>
 </template>
 

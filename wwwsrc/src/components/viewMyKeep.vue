@@ -1,6 +1,6 @@
 <template>
-  <div class="viewMyKeep justify-content-center">
-    <div class="card my-3" style="max-width: 18rem;">
+  <div class="viewMyKeep ">
+    <div class="card my-3 " style="max-width: 18rem;">
       <img :src="keepData.img" class="card-img-top" />
 
       <div class="card-body">
@@ -47,13 +47,13 @@
         <button class="btn btn-info btn-sm mx-auto" @click="Share()">
           Share
         </button>
-
-        <!-- delete button -->
-        <button class="btn btn-danger btn-sm" @click="Delete()">
-          Delete
-        </button>
-        <!-- </div> -->
       </div>
+
+      <!-- delete button -->
+      <button class="btn btn-outline-danger btn-sm" @click="Delete()">
+        Delete
+      </button>
+      <!-- </div> -->
     </div>
   </div>
 </template>
