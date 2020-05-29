@@ -1,9 +1,6 @@
 <template>
   <div class="dashboard ">
-    <div class="col-12 ">
-      <h1>WELCOME TO YOUR DASHBOARD</h1>
-    </div>
-    <div class="col-12 ">
+    <div class="col-9 mb-1 mt-3 mx-auto d-flex justify-content-between">
       <h2>
         My Vaults
       </h2>
@@ -11,14 +8,16 @@
       <button
         data-toggle="modal"
         data-target="#createVault"
-        class="btn btn-sm btn-info"
+        class="btn btn-sm btn-info text-secondary"
       >
         Add Vault
       </button>
       <modal title="New Vault" id="createVault">
         <createVault></createVault>
       </modal>
-      <!-- view vaults -->
+    </div>
+    <!-- view vaults -->
+    <div class="col-10 mx-auto">
       <viewVault
         v-for="vault in vaults"
         :vaultData="vault"
@@ -26,21 +25,22 @@
       ></viewVault>
     </div>
 
-    <div class="col-12">
+    <div class="col-9 mb-1 mt-5 mx-auto d-flex justify-content-between">
       <h2>My Keeps</h2>
       <!-- add keep -->
       <button
         data-toggle="modal"
         data-target="#createKeep"
-        class="btn btn-sm btn-success"
+        class="btn btn-sm btn-info text-secondary"
       >
         Add Keep
       </button>
       <modal title="New Keep" id="createKeep">
         <createKeep></createKeep>
       </modal>
+      </div>
       <!-- view keeps -->
-      <div class="col-12 card-deck">
+      <div class="col-12 mx-auto card-deck">
         <viewMyKeep
           v-for="keep in keeps"
           :keepData="keep"

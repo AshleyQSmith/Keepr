@@ -59,7 +59,7 @@ export default new Vuex.Store({
     async createKeep({ dispatch, commit }, newKeep) {
       try {
         let res = await api.post("Keeps", newKeep);
-        dispatch("getPublicKeeps");
+        dispatch("getUserKeeps");
       } catch (error) {
         console.error(error);
       }
@@ -95,7 +95,7 @@ export default new Vuex.Store({
     async deleteKeep({ dispatch, commit }, keepId) {
       try {
         await api.delete("Keeps/" + keepId);
-        dispatch("getPublicKeeps");
+        dispatch("getUserKeeps");
       } catch (error) {
         console.error(error);
       }
