@@ -17,13 +17,16 @@
 
       <div class="card-footer d-flex justify-content-center">
         <!-- view button -->
-        <button class="btn btn-danger btn-sm mx-auto" @click="OpenKeep()">
+        <button
+          class="btn btn-danger text-secondary btn-sm mx-auto"
+          @click="OpenKeep()"
+        >
           View
         </button>
         <!-- keep button -->
         <div class="dropdown mx-auto">
           <button
-            class="btn btn-sm btn-success dropdown-toggle"
+            class="btn btn-sm btn-success text-secondary dropdown-toggle"
             type="button"
             id="dropdownMenuButton"
             data-toggle="dropdown"
@@ -51,7 +54,10 @@
       </div>
 
       <!-- remove button -->
-      <button class="btn btn-outline-danger btn-sm" @click="RemoveFromVault()">
+      <button
+        class="btn btn-outline-danger mb-2 mx-3 "
+        @click="RemoveFromVault()"
+      >
         Remove From Vault
       </button>
     </div>
@@ -105,12 +111,12 @@ export default {
       this.$store.dispatch("increaseKeepCount", this.countUpKeeps);
     },
     OpenKeep() {
+      this.$store.dispatch("increaseViewCount", this.countUpViews);
       this.$store.commit("setActiveKeep", this.keepData),
         this.$router.push({
           name: "openKeep",
           params: { keepId: this.keepData.id },
         });
-      this.$store.dispatch("increaseViewCount", this.countUpViews);
     },
     RemoveFromVault() {
       this.$store.dispatch("deleteVaultKeep", this.keepData.vaultKeepId);

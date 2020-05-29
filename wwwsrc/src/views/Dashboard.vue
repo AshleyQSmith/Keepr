@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard ">
     <div
-      class="col-9 col-md-6 mb-1 mt-3 mx-auto d-flex justify-content-between"
+      class="col-9 col-md-6 mb-2 mt-3 mx-auto d-flex justify-content-between"
     >
       <h2>
         My Vaults
@@ -64,12 +64,8 @@ export default {
   mounted() {
     this.$store.dispatch("getUserKeeps");
     this.$store.dispatch("getVaultsByUser");
-    // this.$store.dispatch("getUser");
   },
   computed: {
-    // user() {
-    //   return this.$store.state.user;
-    // },
     keeps() {
       return this.$store.state.userKeeps;
     },

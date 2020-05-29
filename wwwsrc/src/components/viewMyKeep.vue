@@ -139,12 +139,12 @@ export default {
     },
 
     OpenKeep() {
+      this.$store.dispatch("increaseViewCount", this.countUpViews);
       this.$store.commit("setActiveKeep", this.keepData),
         this.$router.push({
           name: "openKeep",
           params: { keepId: this.keepData.id },
         });
-      this.$store.dispatch("increaseViewCount", this.countUpViews);
     },
     Share() {
       this.$store.dispatch("increaseShareCount", this.countUpShares);

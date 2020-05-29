@@ -20,13 +20,16 @@
         class="card-footer d-flex justify-content-center"
       >
         <!-- view button -->
-        <button class="btn btn-danger btn-sm mx-auto" @click="OpenKeep()">
+        <button
+          class="btn btn-danger text-secondary btn-sm mx-auto"
+          @click="OpenKeep()"
+        >
           View
         </button>
         <!-- keep button -->
         <div class="dropdown mx-auto">
           <button
-            class="btn btn-sm btn-success dropdown-toggle"
+            class="btn btn-sm btn-success text-secondary dropdown-toggle"
             type="button"
             id="dropdownMenuButton"
             data-toggle="dropdown"
@@ -107,12 +110,12 @@ export default {
       this.$store.dispatch("increaseKeepCount", this.countUpKeeps);
     },
     OpenKeep() {
+      this.$store.dispatch("increaseViewCount", this.countUpViews);
       this.$store.commit("setActiveKeep", this.keepData),
         this.$router.push({
           name: "openKeep",
           params: { keepId: this.keepData.id },
         });
-      this.$store.dispatch("increaseViewCount", this.countUpViews);
     },
     Share() {
       this.$store.dispatch("increaseShareCount", this.countUpShares);

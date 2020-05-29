@@ -12,7 +12,7 @@
     <div class="d-flex justify-content-center">
       <div class="dropdown">
         <button
-          class="btn btn-sm btn-success dropdown-toggle"
+          class="btn btn-sm btn-success text-secondary dropdown-toggle"
           type="button"
           id="dropdownMenuButton"
           data-toggle="dropdown"
@@ -80,8 +80,8 @@ export default {
   },
   methods: {
     AddToVault(vaultId) {
-      this.$store.dispatch("createVaultKeep", this.newVaultKeep);
       this.$store.dispatch("increaseKeepCount", this.countUpKeeps);
+      this.$store.dispatch("createVaultKeep", this.newVaultKeep);
     },
     Share() {
       this.$store.dispatch("increaseShareCount", this.countUpShares);
