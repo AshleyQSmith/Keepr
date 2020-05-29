@@ -1,6 +1,8 @@
 <template>
   <div class="dashboard ">
-    <div class="col-9 mb-1 mt-3 mx-auto d-flex justify-content-between">
+    <div
+      class="col-9 col-md-6 mb-1 mt-3 mx-auto d-flex justify-content-between"
+    >
       <h2>
         My Vaults
       </h2>
@@ -17,7 +19,7 @@
       </modal>
     </div>
     <!-- view vaults -->
-    <div class="col-10 mx-auto">
+    <div class="col-10 col-md-7 mx-auto">
       <viewVault
         v-for="vault in vaults"
         :vaultData="vault"
@@ -25,7 +27,9 @@
       ></viewVault>
     </div>
 
-    <div class="col-9 mb-1 mt-5 mx-auto d-flex justify-content-between">
+    <div
+      class="col-10 col-md-8 mb-1 mt-5 mx-auto d-flex justify-content-between"
+    >
       <h2>My Keeps</h2>
       <!-- add keep -->
       <button

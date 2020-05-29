@@ -8,6 +8,7 @@
         <p class="card-text">
           {{ keepData.description }}
         </p>
+
         <small class="text-muted"
           >Views: {{ keepData.views }} | Keeps: {{ keepData.keeps }} | Shares:
           {{ keepData.shares }}</small
@@ -67,10 +68,27 @@ export default {
         vaultId: "",
         keepId: this.keepData.id,
       },
-      // vaultKeepData: {
-      //   vaultKeepId: this.keepData.vaultKeepId,
-      //   vaultId: this.keepdata.vaultId,
-      // },
+      countUpKeeps: {
+        id: this.keepData.id,
+        isPrivate: this.keepData.isPrivate,
+        views: this.keepData.views,
+        keeps: this.keepData.keeps + 1,
+        shares: this.keepData.shares,
+      },
+      countUpViews: {
+        id: this.keepData.id,
+        isPrivate: this.keepData.isPrivate,
+        views: this.keepData.views + 1,
+        keeps: this.keepData.keeps,
+        shares: this.keepData.shares,
+      },
+      countUpShares: {
+        id: this.keepData.id,
+        isPrivate: this.keepData.isPrivate,
+        views: this.keepData.views,
+        keeps: this.keepData.keeps,
+        shares: this.keepData.shares + 1,
+      },
     };
   },
   mounted() {
@@ -84,6 +102,7 @@ export default {
   methods: {
     AddToVault(vaultID) {
       this.$store.dispatch("createVaultKeep", this.newVaultKeep);
+      this.$store.dispatch("increaseKeepCount", this.countUpKeeps);
     },
     OpenKeep() {
       this.$store.commit("setActiveKeep", this.keepData),
@@ -91,11 +110,14 @@ export default {
           name: "openKeep",
           params: { keepId: this.keepData.id },
         });
+      this.$store.dispatch("increaseViewCount", this.countUpViews);
     },
     RemoveFromVault() {
       this.$store.dispatch("deleteVaultKeep", this.keepData.vaultKeepId);
     },
-    Share() {},
+    Share() {
+      this.$store.dispatch("increaseShareCount", this.countUpShares);
+    },
   },
   components: {},
 };

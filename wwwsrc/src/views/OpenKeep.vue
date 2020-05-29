@@ -1,10 +1,10 @@
 <template>
-  <div class="openKeep mt-3 col-10 mx-auto text-center">
+  <div class="openKeep my-5 col-10 mx-auto text-center">
     <img :src="activeKeep.img" class="img-fluid" />
     <h1>{{ activeKeep.name }}</h1>
     <h4>{{ activeKeep.description }}</h4>
     <p class="text-muted">
-      Views: {{ activeKeep.views }} | Keeps: {{ activeKeep.keeps }} | Shares:
+      Views {{ activeKeep.views }} | Keeps {{ activeKeep.keeps }} | Shares
       {{ activeKeep.shares }}
     </p>
 
@@ -24,7 +24,7 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a
             class="dropdown-item "
-            @click.prevent="AddToVault(this.Vault.id)"
+            @click.prevent="AddToVault((newVaultKeep.vaultId = Vault.id))"
             v-for="Vault in Vaults"
             :key="Vault.id"
             href="#"
@@ -45,7 +45,26 @@
 export default {
   name: "openKeep",
   data() {
-    return {};
+    return {
+      newVaultKeep: {
+        vaultId: "",
+        keepId: this.$store.state.activeKeep.id,
+      },
+      countUpKeeps: {
+        id: this.$store.state.activeKeep.id,
+        isPrivate: this.$store.state.activeKeep.isPrivate,
+        views: this.$store.state.activeKeep.views,
+        keeps: this.$store.state.activeKeep.keeps + 1,
+        shares: this.$store.state.activeKeep.shares,
+      },
+      countUpShares: {
+        id: this.$store.state.activeKeep.id,
+        isPrivate: this.$store.state.activeKeep.isPrivate,
+        views: this.$store.state.activeKeep.views,
+        keeps: this.$store.state.activeKeep.keeps,
+        shares: this.$store.state.activeKeep.shares + 1,
+      },
+    };
   },
   mounted() {
     this.$store.dispatch("getKeepById", this.$route.params.keepId);
@@ -60,8 +79,12 @@ export default {
     },
   },
   methods: {
-    AddToVault() {
-      this.$store.dispatch("addVaultKeep", this.activeKeep.id, this.vault.id);
+    AddToVault(vaultId) {
+      this.$store.dispatch("createVaultKeep", this.newVaultKeep);
+      this.$store.dispatch("increaseKeepCount", this.countUpKeeps);
+    },
+    Share() {
+      this.$store.dispatch("increaseShareCount", this.countUpShares);
     },
   },
   components: {},
