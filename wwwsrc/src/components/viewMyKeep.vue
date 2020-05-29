@@ -14,15 +14,21 @@
         >
       </div>
 
-      <div class="card-footer d-flex justify-content-center">
+      <div
+        v-if="!keepData.isPrivate"
+        class="card-footer d-flex justify-content-center"
+      >
         <!-- view button -->
-        <button class="btn btn-danger btn-sm mx-auto" @click="OpenKeep()">
+        <button
+          class="btn btn-danger text-secondary btn-sm mx-auto"
+          @click="OpenKeep()"
+        >
           View
         </button>
         <!-- keep button -->
         <div class="dropdown mx-auto">
           <button
-            class="btn btn-sm btn-success dropdown-toggle"
+            class="btn btn-sm text-secondary btn-success dropdown-toggle"
             type="button"
             id="dropdownMenuButton"
             data-toggle="dropdown"
@@ -49,10 +55,24 @@
         </button>
       </div>
 
-      <!-- delete button -->
-      <button class="btn btn-outline-danger btn-sm" @click="Delete()">
-        Delete
-      </button>
+      <div v-if="keepData.isPrivate" class="justify-content-center mb-2">
+        <!-- make public button -->
+        <button
+          class="btn btn-primary border-0 text-secondary mx-auto btn-block"
+          @click="setKeepPublic()"
+        >
+          Make Public
+        </button>
+
+        <!-- delete button -->
+        <button
+          class="btn btn-outline-danger mx-auto btn-block"
+          @click="Delete()"
+        >
+          Delete
+        </button>
+      </div>
+
       <!-- </div> -->
     </div>
   </div>
@@ -68,6 +88,13 @@ export default {
         vaultId: "",
         keepId: this.keepData.id,
       },
+      publicKeep: {
+        id: this.keepData.id,
+        isPrivate: false,
+        views: this.keepData.views,
+        keeps: this.keepData.keeps,
+        shares: this.keepData.shares,
+      },
     };
   },
   mounted() {
@@ -81,6 +108,9 @@ export default {
   methods: {
     Delete() {
       this.$store.dispatch("deleteKeep", this.keepData.id);
+    },
+    setKeepPublic() {
+      this.$store.dispatch("setKeepPublic", this.publicKeep);
     },
     AddToVault(vaultID) {
       this.$store.dispatch("createVaultKeep", this.newVaultKeep);

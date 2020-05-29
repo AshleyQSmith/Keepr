@@ -68,7 +68,7 @@ namespace Keepr.Repositories
           isPrivate = @IsPrivate,
           views = @Views,
           keeps = @Keeps,
-          shares = @Shares,
+          shares = @Shares
         WHERE id = @Id LIMIT 1";
       _db.Execute(sql, keepToUpdate);
       return keepToUpdate;

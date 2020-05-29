@@ -115,8 +115,7 @@ export default new Vuex.Store({
     async setKeepPublic({ dispatch, commit }, keepData) {
       try {
         let res = await api.put("Keeps/" + `${keepData.id}`, keepData);
-        commit("setUserKeeps", res.data);
-        // dispatch("getUserKeeps", keepData.userId)
+        dispatch("getUserKeeps", keepData.userId);
       } catch (error) {}
     },
 
