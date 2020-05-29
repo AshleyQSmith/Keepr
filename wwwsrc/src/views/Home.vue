@@ -15,16 +15,10 @@
 import viewKeep from "../components/viewKeep";
 export default {
   name: "home",
-  // data(){
-  //   return {}
-  // },
   mounted() {
     this.$store.dispatch("getPublicKeeps");
   },
   computed: {
-    user() {
-      return this.$store.state.user;
-    },
     keeps() {
       return this.$store.state.publicKeeps;
     },

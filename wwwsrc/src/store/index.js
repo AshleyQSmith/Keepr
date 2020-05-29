@@ -17,7 +17,6 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   state: {
-    user: {},
     publicKeeps: [],
     userKeeps: [],
     activeKeep: {},
@@ -27,9 +26,6 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    setUser(state, user) {
-      state.user = user;
-    },
     setPublicKeeps(state, keeps) {
       state.publicKeeps = keeps;
     },
@@ -56,14 +52,6 @@ export default new Vuex.Store({
     },
     resetBearer() {
       api.defaults.headers.authorization = "";
-    },
-    async getUser({ commit }) {
-      try {
-        let res = await api.get("User");
-        commit("setUser", res.data);
-      } catch (err) {
-        console.error(err);
-      }
     },
     // SECTION Keeps
 

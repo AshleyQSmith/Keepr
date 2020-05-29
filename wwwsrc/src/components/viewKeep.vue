@@ -15,7 +15,10 @@
         >
       </div>
 
-      <div class="card-footer d-flex justify-content-center">
+      <div
+        v-if="$auth.isAuthenticated"
+        class="card-footer d-flex justify-content-center"
+      >
         <!-- view button -->
         <button class="btn btn-danger btn-sm mx-auto" @click="OpenKeep()">
           View
@@ -87,11 +90,15 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch("getVaultsByUser");
+    if (this.$auth.isAuthenticated) {
+      this.$store.dispatch("getVaultsByUser");
+    }
   },
   computed: {
     Vaults() {
-      return this.$store.state.userVaults;
+      if (this.$auth.isAuthenticated) {
+        return this.$store.state.userVaults;
+      }
     },
   },
   methods: {
